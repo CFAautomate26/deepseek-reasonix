@@ -287,6 +287,41 @@
   .announcement h3 { font-size: 16px; font-weight: 700; margin-top: 2px; }
   .announcement p { font-size: 14px; color: var(--ink-soft); margin-top: 4px; }
 
+  /* ---------- team updates (locked) ---------- */
+  .lockbox {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 24px;
+  }
+  .lockbox .lock-note { font-size: 14px; color: var(--ink-soft); max-width: 60ch; }
+  .lockbox form { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+  .lockbox input {
+    flex: 1 1 200px;
+    font: inherit;
+    padding: 11px 14px;
+    border: 1.5px solid var(--line);
+    border-radius: 10px;
+    background: var(--ground);
+    color: var(--ink);
+  }
+  .lockbox input:focus-visible { outline: 2px solid var(--red); outline-offset: 1px; border-color: var(--red); }
+  .unlock-btn {
+    font: inherit;
+    font-weight: 700;
+    background: var(--red);
+    color: #fff;
+    border: none;
+    border-radius: 999px;
+    padding: 11px 24px;
+    cursor: pointer;
+  }
+  .unlock-btn:hover { background: var(--red-deep); }
+  .lock-error { margin-top: 10px; font-size: 14px; font-weight: 600; color: var(--red-deep); }
+  .lock-actions { margin-top: 12px; font-size: 13px; }
+  .lock-actions a { color: var(--ink-soft); }
+
   /* ---------- hiring ---------- */
   .hire {
     background: var(--red);
@@ -393,6 +428,7 @@
     <nav aria-label="Sections">
       <a href="#events">Events</a>
       <a href="#announcements">Announcements</a>
+      <a href="#team-updates">Team Updates</a>
       <a href="#join">Join the Team</a>
       <a href="#community">Community</a>
     </nav>
@@ -425,6 +461,23 @@
         <h2>Announcements</h2>
       </div>
       <div class="announcements" id="announcement-list"></div>
+    </section>
+
+    <section id="team-updates">
+      <div class="section-head">
+        <h2>Team Updates</h2>
+        <span class="hint">Team only, passcode required</span>
+      </div>
+      <div class="lockbox" id="lockbox">
+        <p class="lock-note">Launch updates and internal notes for our team. Enter the team passcode to unlock, ask a leader if you need it.</p>
+        <form id="unlock-form">
+          <input type="password" id="passcode-input" placeholder="Team passcode" autocomplete="off" aria-label="Team passcode">
+          <button type="submit" class="unlock-btn">Unlock</button>
+        </form>
+        <p class="lock-error" id="lock-error" hidden>That passcode did not work, try again.</p>
+      </div>
+      <div class="announcements" id="internal-list" hidden></div>
+      <p class="lock-actions" id="lock-actions" hidden><a href="#team-updates" id="lock-link">Lock this board on this device</a></p>
     </section>
 
     <section id="join">
@@ -606,6 +659,93 @@ for (const a of ANNOUNCEMENTS) {
   if (a.body) item.appendChild(el("p", null, a.body));
   annList.appendChild(item);
 }
+
+/* ------ team-only board (encrypted, do not edit by hand) ------
+   To update: regenerate the blob with team-site/encrypt_internal.py
+   and replace INTERNAL_BLOB below. The plaintext never lives here. */
+
+const INTERNAL_BLOB = {"v": 1, "iter": 310000, "salt": "qMbdQfjSv9zjVwSnX6xzOg==", "iv": "4Ddi9eKny2glYIuV", "ct": "PCWbG02GefJTSo1r86Iv3T0uYlRT6aP7HFPRWIzKh61DmJbTpCKbb3BEnEorYCjusss+HqfUPdqHPh16newU703BzltaXv+lWAuY2AsRklKDpdYtw/LXoYZ78Jv70Nojuok4JFJHBT9PaLFG4mfeHqfgdjG5UZRf1HRUl/wbLZjPBQk0FileAljciJ71Spvuou3uQnroDEHBZ21ZQO6MMSRmACeV1b5sNB2XcQNicYBLM9+SQILMB/TXMK9mZ2NJnIsbHtu6OLVA29NIPLjAS6eoKpIgUqOh+NQN4LsgaxnsxWLJOg6Yaj8u/ABd4EZ7EYT+YL4oB2y76nuuOsCO1BeOC9UzO1VN2XmZDrluvZSEZij+bDgwe9U5MGiTaVbGal+tNLKjaQwjSn/e0Uj4+VQ0mXpo6HcLWYbMqp38B+CftoFwD/8yqEdwLtN4Wny/Vlc32FrCYhFJdfLt+l/GheS0hahbeMd4heGrzKFPG2bjNK6ZIfF6bGr8KLtpP6kX6gMjiemHpZJotEo1soJpPwiXiVRvnP/euL68doXGB1mz5Wj87JtlHzJUIKKUrs5TBfaJNldDp0w/hg6lrrYHek32/Ly5FRnfYPcn+79taeTDUWVXF0G566PTFof6+h/Q0A/tibd9hUYMvM16Sp8P7SJrtnRq862/lIcaVg=="};
+
+const lockbox = document.getElementById("lockbox");
+const internalList = document.getElementById("internal-list");
+const lockActions = document.getElementById("lock-actions");
+const lockError = document.getElementById("lock-error");
+const unlockForm = document.getElementById("unlock-form");
+const passInput = document.getElementById("passcode-input");
+const PASS_KEY = "cfaTeamPass";
+
+function b64d(s) {
+  return Uint8Array.from(atob(s), (c) => c.charCodeAt(0));
+}
+
+async function decryptInternal(pass) {
+  const enc = new TextEncoder();
+  const keyMaterial = await crypto.subtle.importKey("raw", enc.encode(pass), "PBKDF2", false, ["deriveKey"]);
+  const key = await crypto.subtle.deriveKey(
+    { name: "PBKDF2", salt: b64d(INTERNAL_BLOB.salt), iterations: INTERNAL_BLOB.iter, hash: "SHA-256" },
+    keyMaterial,
+    { name: "AES-GCM", length: 256 },
+    false,
+    ["decrypt"]
+  );
+  const pt = await crypto.subtle.decrypt({ name: "AES-GCM", iv: b64d(INTERNAL_BLOB.iv) }, key, b64d(INTERNAL_BLOB.ct));
+  return JSON.parse(new TextDecoder().decode(pt));
+}
+
+function renderInternal(items) {
+  internalList.textContent = "";
+  for (const a of items) {
+    const item = el("div", "announcement");
+    item.appendChild(el("div", "a-date", a.date + (a.tag ? " · " + a.tag : "")));
+    item.appendChild(el("h3", null, a.title));
+    if (a.body) item.appendChild(el("p", null, a.body));
+    internalList.appendChild(item);
+  }
+}
+
+async function tryUnlock(pass, remember) {
+  try {
+    const items = await decryptInternal(pass);
+    renderInternal(items);
+    lockbox.hidden = true;
+    internalList.hidden = false;
+    lockActions.hidden = false;
+    if (remember) {
+      try { localStorage.setItem(PASS_KEY, pass); } catch (e) {}
+    }
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+unlockForm.addEventListener("submit", async (ev) => {
+  ev.preventDefault();
+  lockError.hidden = true;
+  const ok = await tryUnlock(passInput.value, true);
+  if (!ok) {
+    lockError.hidden = false;
+    passInput.select();
+  }
+});
+
+document.getElementById("lock-link").addEventListener("click", (ev) => {
+  ev.preventDefault();
+  try { localStorage.removeItem(PASS_KEY); } catch (e) {}
+  internalList.hidden = true;
+  lockActions.hidden = true;
+  lockbox.hidden = false;
+  passInput.value = "";
+});
+
+(async () => {
+  let saved = null;
+  try { saved = localStorage.getItem(PASS_KEY); } catch (e) {}
+  if (saved && !(await tryUnlock(saved, false))) {
+    try { localStorage.removeItem(PASS_KEY); } catch (e) {}
+  }
+})();
+
 </script>
 
 </body>
