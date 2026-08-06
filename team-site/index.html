@@ -301,9 +301,16 @@
   }
   .hire h2 { font-size: 26px; font-weight: 800; letter-spacing: -0.01em; text-wrap: balance; }
   .hire p { margin-top: 8px; font-size: 15px; opacity: 0.92; max-width: 48ch; }
+  .hire-ctas {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: none;
+  }
   .hire .cta {
     flex: none;
     display: inline-block;
+    text-align: center;
     background: #fff;
     color: var(--ink);
     font-weight: 700;
@@ -424,9 +431,12 @@
       <div class="hire">
         <div>
           <h2>Know someone great? We're hiring.</h2>
-          <p>We're always looking for friendly, hard-working people to join the team. Share this link with anyone who'd be a great fit, referrals from our own team members are the best hires we make.</p>
+          <p>We're hiring Front of House and Back of House Team Members right now. Apply on Indeed, or share these links with someone who'd be a great fit, referrals from our own team members are the best hires we make.</p>
         </div>
-        <a class="cta" href="https://careers.chick-fil-a.com/" target="_blank" rel="noopener">Apply to join our team</a>
+        <div class="hire-ctas">
+          <a class="cta" href="https://ca.indeed.com/jobs?q=Chick-fil-A+front+of+house+team+member&l=London%2C+ON" target="_blank" rel="noopener">FOH Team Member, apply on Indeed</a>
+          <a class="cta" href="https://ca.indeed.com/jobs?q=Chick-fil-A+back+of+house+team+member&l=London%2C+ON" target="_blank" rel="noopener">BOH Team Member, apply on Indeed</a>
+        </div>
       </div>
     </section>
 
