@@ -404,6 +404,22 @@
   .link-card h3 { font-size: 15px; font-weight: 700; color: var(--red-deep); }
   .link-card p { font-size: 13px; color: var(--ink-soft); margin-top: 4px; }
 
+  .story {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 14px;
+    margin-top: 14px;
+  }
+  .story-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 22px 24px;
+  }
+  .story-card h3 { font-size: 16px; font-weight: 800; color: var(--red-deep); }
+  .story-card p { font-size: 14px; margin-top: 8px; line-height: 1.65; }
+
   footer {
     margin-top: 48px;
     background: var(--red);
@@ -517,6 +533,16 @@
           <h3>@chickfila.southlondon</h3>
           <p>Monthly events, team moments, and community nights on our Instagram.</p>
         </a>
+      </div>
+      <div class="story">
+        <div class="story-card">
+          <h3>Our Story</h3>
+          <p>Chick-fil-A Wharncliffe &amp; Wonderland opened its doors on November 30, 2023, bringing the first Chick-fil-A restaurant to London, Ontario. Located in The District at 3459 Wonderland Road South, we opened with a team of roughly 130 full and part time Team Members, and we have been serving our neighbours with signature hospitality ever since. From Dotsy and Bingo nights to fundraiser evenings with local organizations, our restaurant is built to be a gathering place for the community we love.</p>
+        </div>
+        <div class="story-card">
+          <h3>Meet Our Operator, Josh Huesser</h3>
+          <p>Josh Huesser is the local Owner-Operator of Chick-fil-A Wharncliffe &amp; Wonderland. Born in Kitchener, Ontario, Josh earned a bachelor's degree in history and completed post graduate studies in sales and operations. His Chick-fil-A journey began with his uncle, an Owner-Operator in Pennsylvania, where Josh served as a restaurant director and discovered a passion for mentoring Team Members. After years in Florida, Josh and his wife Julie returned to Canada with their two young children to open our restaurant, and he leads our team with a focus on care, growth, and community.</p>
+        </div>
       </div>
     </section>
 
