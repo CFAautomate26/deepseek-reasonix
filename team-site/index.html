@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wharncliffe &amp; Wonderland Team Hub</title>
+<style>
+  :root {
+    --red: #E51636;
+    --red-deep: #A50D26;
+    --red-tint: #FCE9EC;
+    --ink: #2B1B1E;
+    --ink-soft: #6E5A5E;
+    --ground: #FDFBFA;
+    --card: #FFFFFF;
+    --line: #F0E2E4;
+    --shadow: 0 1px 2px rgba(43, 27, 30, 0.05), 0 8px 24px rgba(43, 27, 30, 0.06);
+    --radius: 14px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --red: #E51636;
+      --red-deep: #FF4D64;
+      --red-tint: #3A1F25;
+      --ink: #F5EDEE;
+      --ink-soft: #B39CA1;
+      --ground: #1C1416;
+      --card: #261B1E;
+      --line: #3A2A2E;
+      --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.35);
+    }
+  }
+  :root[data-theme="light"] {
+    --red: #E51636;
+    --red-deep: #A50D26;
+    --red-tint: #FCE9EC;
+    --ink: #2B1B1E;
+    --ink-soft: #6E5A5E;
+    --ground: #FDFBFA;
+    --card: #FFFFFF;
+    --line: #F0E2E4;
+    --shadow: 0 1px 2px rgba(43, 27, 30, 0.05), 0 8px 24px rgba(43, 27, 30, 0.06);
+  }
+  :root[data-theme="dark"] {
+    --red: #E51636;
+    --red-deep: #FF4D64;
+    --red-tint: #3A1F25;
+    --ink: #F5EDEE;
+    --ink-soft: #B39CA1;
+    --ground: #1C1416;
+    --card: #261B1E;
+    --line: #3A2A2E;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.35);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: "Avenir Next", "Avenir", "Futura", "Segoe UI", "Helvetica Neue", system-ui, sans-serif;
+    background: var(--ground);
+    color: var(--ink);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--red-deep); }
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--red);
+    outline-offset: 2px;
+  }
+
+  .wrap { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- header ---------- */
+  header {
+    border-bottom: 1px solid var(--line);
+    background: var(--card);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 14px 0;
+    flex-wrap: wrap;
+  }
+  .wordmark {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--ink);
+  }
+  .wordmark .dot {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--red);
+    color: #fff;
+    display: grid;
+    place-items: center;
+    font-weight: 700;
+    font-size: 17px;
+    flex: none;
+  }
+  .wordmark .store {
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+  }
+  .wordmark .sub {
+    display: block;
+    font-weight: 500;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: var(--red);
+  }
+  nav { display: flex; gap: 4px; flex-wrap: wrap; }
+  nav a {
+    text-decoration: none;
+    color: var(--ink-soft);
+    font-size: 14px;
+    font-weight: 600;
+    padding: 7px 12px;
+    border-radius: 8px;
+  }
+  nav a:hover { color: var(--red-deep); background: var(--red-tint); }
+
+  /* ---------- hero ---------- */
+  .hero { padding: 56px 0 40px; }
+  .hero .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--red);
+    margin-bottom: 12px;
+  }
+  .hero h1 {
+    font-size: clamp(30px, 5vw, 44px);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    text-wrap: balance;
+    max-width: 18ch;
+  }
+  .hero p {
+    margin-top: 14px;
+    font-size: 17px;
+    color: var(--ink-soft);
+    max-width: 52ch;
+  }
+
+  /* ---------- sections ---------- */
+  section { padding: 36px 0; }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .section-head h2 {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+  }
+  .section-head .hint { font-size: 13px; color: var(--ink-soft); }
+
+  /* ---------- events ---------- */
+  .events { display: grid; gap: 14px; }
+  .event {
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    box-shadow: var(--shadow);
+  }
+  .date-block {
+    flex: none;
+    width: 58px;
+    text-align: center;
+    background: var(--red-tint);
+    border-radius: 10px;
+    padding: 8px 0 10px;
+  }
+  .date-block .month {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--red-deep);
+  }
+  .date-block .day {
+    font-size: 24px;
+    font-weight: 800;
+    line-height: 1.1;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+  .event-body { min-width: 0; }
+  .event-body h3 { font-size: 17px; font-weight: 700; letter-spacing: -0.01em; }
+  .event-body .meta { font-size: 14px; color: var(--ink-soft); margin-top: 2px; }
+  .event-body .desc { font-size: 14px; margin-top: 8px; }
+  .tag {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--red-deep);
+    background: var(--red-tint);
+    border-radius: 999px;
+    padding: 3px 10px;
+  }
+  .empty {
+    color: var(--ink-soft);
+    font-size: 15px;
+    padding: 24px;
+    text-align: center;
+    border: 1px dashed var(--line);
+    border-radius: var(--radius);
+  }
+
+  /* ---------- announcements ---------- */
+  .announcements { display: grid; gap: 0; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+  .announcement { padding: 16px 20px; border-bottom: 1px solid var(--line); }
+  .announcement:last-child { border-bottom: none; }
+  .announcement .a-date {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--red);
+  }
+  .announcement h3 { font-size: 16px; font-weight: 700; margin-top: 2px; }
+  .announcement p { font-size: 14px; color: var(--ink-soft); margin-top: 4px; }
+
+  /* ---------- hiring ---------- */
+  .hire {
+    background: var(--red);
+    border-radius: 18px;
+    color: #fff;
+    padding: 36px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .hire h2 { font-size: 26px; font-weight: 800; letter-spacing: -0.01em; text-wrap: balance; }
+  .hire p { margin-top: 8px; font-size: 15px; opacity: 0.92; max-width: 48ch; }
+  .hire .cta {
+    flex: none;
+    display: inline-block;
+    background: #fff;
+    color: var(--ink);
+    font-weight: 700;
+    font-size: 15px;
+    text-decoration: none;
+    padding: 13px 26px;
+    border-radius: 999px;
+  }
+  .hire .cta:hover { transform: translateY(-1px); }
+  @media (prefers-reduced-motion: reduce) {
+    .hire .cta:hover { transform: none; }
+  }
+
+  /* ---------- community links ---------- */
+  .links { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+  .link-card {
+    display: block;
+    text-decoration: none;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    box-shadow: var(--shadow);
+    color: var(--ink);
+  }
+  .link-card:hover { border-color: var(--red); }
+  .link-card h3 { font-size: 15px; font-weight: 700; color: var(--red-deep); }
+  .link-card p { font-size: 13px; color: var(--ink-soft); margin-top: 4px; }
+
+  footer {
+    margin-top: 40px;
+    border-top: 1px solid var(--line);
+    padding: 28px 0 40px;
+    font-size: 13px;
+    color: var(--ink-soft);
+  }
+  footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap header-inner">
+    <a class="wordmark" href="#top">
+      <span class="dot" aria-hidden="true">C</span>
+      <span class="store">Chick-fil-A Wharncliffe &amp; Wonderland
+        <span class="sub">Team Hub</span>
+      </span>
+    </a>
+    <nav aria-label="Sections">
+      <a href="#events">Events</a>
+      <a href="#announcements">Announcements</a>
+      <a href="#join">Join the Team</a>
+      <a href="#community">Community</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="wrap">
+
+    <div class="hero">
+      <div class="eyebrow">London, Ontario · Store #30029</div>
+      <h1>Everything our team needs, in one place.</h1>
+      <p>Upcoming events, restaurant announcements, and how to invite great people to join us — for the Wharncliffe &amp; Wonderland family and our community.</p>
+    </div>
+
+    <section id="events">
+      <div class="section-head">
+        <h2>Upcoming Events</h2>
+        <span class="hint">Newest first — see something missing? Tell a leader.</span>
+      </div>
+      <div class="events" id="event-list"></div>
+    </section>
+
+    <section id="announcements">
+      <div class="section-head">
+        <h2>Announcements</h2>
+      </div>
+      <div class="announcements" id="announcement-list"></div>
+    </section>
+
+    <section id="join">
+      <div class="hire">
+        <div>
+          <h2>Know someone great? We're hiring.</h2>
+          <p>We're always looking for friendly, hard-working people to join the team. Share this link with anyone who'd be a great fit — referrals from our own team members are the best hires we make.</p>
+        </div>
+        <a class="cta" href="https://careers.chick-fil-a.com/" target="_blank" rel="noopener">Apply to join our team</a>
+      </div>
+    </section>
+
+    <section id="community">
+      <div class="section-head">
+        <h2>Community &amp; Resources</h2>
+      </div>
+      <div class="links">
+        <a class="link-card" href="https://www.chick-fil-a.com/" target="_blank" rel="noopener">
+          <h3>Chick-fil-A Canada</h3>
+          <p>Menu, hours, and restaurant info for guests.</p>
+        </a>
+        <a class="link-card" href="#events">
+          <h3>Spirit Nights &amp; Fundraisers</h3>
+          <p>Partner with us for a give-back night — a portion of sales supports your organization.</p>
+        </a>
+        <a class="link-card" href="#announcements">
+          <h3>Team Announcements</h3>
+          <p>Schedule notes, celebrations, and what's new in the restaurant.</p>
+        </a>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Chick-fil-A Wharncliffe &amp; Wonderland · London, Ontario</span>
+    <span>Internal team site — questions? Talk to your leader.</span>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   EDIT YOUR CONTENT HERE
+   ------------------------------------------------------------
+   To add an event or announcement, copy one of the blocks
+   below (from { to },) and change the text. Save the file and
+   the page updates automatically. Delete a block to remove it.
+   ============================================================ */
+
+const EVENTS = [
+  {
+    month: "Aug",
+    day: "14",
+    title: "Team Huddle & Pre-Shift Rally",
+    meta: "Thursday · 8:30 AM · Back of house",
+    desc: "Quick all-team huddle before open — new menu items, this month's goals, and a few shout-outs.",
+    tag: "Team Event",
+  },
+  {
+    month: "Aug",
+    day: "21",
+    title: "Spirit Night Fundraiser",
+    meta: "Thursday · 5–8 PM · Dining room",
+    desc: "Community give-back night — a portion of the evening's sales supports our partner organization. Invite friends and family!",
+    tag: "Fundraiser",
+  },
+  {
+    month: "Sep",
+    day: "02",
+    title: "Fall Training Day",
+    meta: "Wednesday · 2–5 PM · Training room",
+    desc: "Hands-on refreshers for food safety and hospitality. Sign-up sheet is posted in the break room.",
+    tag: "Training",
+  },
+  {
+    month: "Sep",
+    day: "12",
+    title: "Team Social: End-of-Summer Cookout",
+    meta: "Saturday · 4 PM · Springbank Park",
+    desc: "Food, games, and family welcome. RSVP with your shift lead by Sep 5.",
+    tag: "Team Social",
+  },
+];
+
+const ANNOUNCEMENTS = [
+  {
+    date: "Aug 5",
+    title: "Welcome to the new Team Hub!",
+    body: "This site is our new home for events, announcements, and hiring info. Bookmark it on your phone.",
+  },
+  {
+    date: "Aug 3",
+    title: "September availability forms due Aug 20",
+    body: "If your school schedule is changing this fall, hand in your updated availability to a leader by August 20.",
+  },
+  {
+    date: "Jul 30",
+    title: "Congrats to our Team Member of the Month!",
+    body: "Thank you for going the second mile every single shift — we see you and we appreciate you.",
+  },
+];
+
+/* ------ rendering (no need to edit below this line) ------ */
+
+function el(tag, className, text) {
+  const node = document.createElement(tag);
+  if (className) node.className = className;
+  if (text) node.textContent = text;
+  return node;
+}
+
+const eventList = document.getElementById("event-list");
+if (EVENTS.length === 0) {
+  eventList.appendChild(el("div", "empty", "No events scheduled right now — check back soon."));
+}
+for (const ev of EVENTS) {
+  const card = el("article", "event");
+  const date = el("div", "date-block");
+  date.appendChild(el("div", "month", ev.month));
+  date.appendChild(el("div", "day", ev.day));
+  const body = el("div", "event-body");
+  body.appendChild(el("h3", null, ev.title));
+  body.appendChild(el("div", "meta", ev.meta));
+  if (ev.desc) body.appendChild(el("p", "desc", ev.desc));
+  if (ev.tag) body.appendChild(el("span", "tag", ev.tag));
+  card.appendChild(date);
+  card.appendChild(body);
+  eventList.appendChild(card);
+}
+
+const annList = document.getElementById("announcement-list");
+if (ANNOUNCEMENTS.length === 0) {
+  annList.appendChild(el("div", "empty", "No announcements right now."));
+}
+for (const a of ANNOUNCEMENTS) {
+  const item = el("div", "announcement");
+  item.appendChild(el("div", "a-date", a.date));
+  item.appendChild(el("h3", null, a.title));
+  if (a.body) item.appendChild(el("p", null, a.body));
+  annList.appendChild(item);
+}
+</script>
+
+</body>
+</html>
