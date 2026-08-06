@@ -275,6 +275,35 @@
     .hire .cta:hover { transform: none; }
   }
 
+  /* ---------- instagram ---------- */
+  .insta {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+    padding: 30px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .insta h2 { font-size: 22px; font-weight: 800; letter-spacing: -0.01em; }
+  .insta .handle { color: var(--red); }
+  .insta p { margin-top: 6px; font-size: 15px; color: var(--ink-soft); max-width: 52ch; }
+  .insta .cta {
+    flex: none;
+    display: inline-block;
+    background: var(--red);
+    color: #fff;
+    font-weight: 700;
+    font-size: 15px;
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: 999px;
+  }
+  .insta .cta:hover { background: var(--red-deep); }
+
   /* ---------- community links ---------- */
   .links { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
   .link-card {
@@ -354,6 +383,16 @@
       </div>
     </section>
 
+    <section id="instagram">
+      <div class="insta">
+        <div>
+          <h2>Follow along <span class="handle">@chickfila.southlondon</span></h2>
+          <p>Monthly event calendars, team moments, fundraiser nights, and community highlights — always posted first on our Instagram.</p>
+        </div>
+        <a class="cta" href="https://www.instagram.com/chickfila.southlondon" target="_blank" rel="noopener">Follow us on Instagram</a>
+      </div>
+    </section>
+
     <section id="community">
       <div class="section-head">
         <h2>Community &amp; Resources</h2>
@@ -367,9 +406,9 @@
           <h3>Spirit Nights &amp; Fundraisers</h3>
           <p>Partner with us for a give-back night — a portion of sales supports your organization.</p>
         </a>
-        <a class="link-card" href="#announcements">
-          <h3>Team Announcements</h3>
-          <p>Schedule notes, celebrations, and what's new in the restaurant.</p>
+        <a class="link-card" href="https://www.instagram.com/chickfila.southlondon" target="_blank" rel="noopener">
+          <h3>@chickfila.southlondon</h3>
+          <p>Our Instagram — monthly events, team moments, and community nights.</p>
         </a>
       </div>
     </section>
