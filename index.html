@@ -299,6 +299,48 @@
   .lock-actions { margin-top: 12px; font-size: 13px; }
   .lock-actions a { color: var(--ink-soft); }
 
+  /* ---------- join our team ---------- */
+  .join-intro { font-size: 16px; color: var(--ink-soft); max-width: 62ch; margin-bottom: 20px; }
+  .benefits {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+  .benefit {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 18px 20px;
+  }
+  .benefit .icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: var(--red-tint);
+    display: grid;
+    place-items: center;
+    margin-bottom: 10px;
+  }
+  .benefit .icon svg { width: 22px; height: 22px; stroke: var(--red); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .benefit h3 { font-size: 15px; font-weight: 700; }
+  .benefit p { font-size: 13.5px; color: var(--ink-soft); margin-top: 4px; }
+  .roles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+  .role-card {
+    background: var(--red-tint);
+    border: 2px solid var(--red);
+    border-radius: var(--radius);
+    padding: 20px 22px;
+  }
+  .role-card h3 { font-size: 17px; font-weight: 800; color: var(--red-deep); }
+  .role-card p { font-size: 14px; margin-top: 6px; line-height: 1.6; }
+
   /* ---------- hiring ---------- */
   .hire {
     background: var(--red);
@@ -474,6 +516,52 @@
     </section>
 
     <section id="join">
+      <div class="section-head">
+        <h2>Join Our Team</h2>
+      </div>
+      <p class="join-intro">A job at Chick-fil-A Wharncliffe &amp; Wonderland is more than a paycheque. It is a place to grow, to be part of a team that genuinely cares, and to serve our community with the hospitality Chick-fil-A is known for.</p>
+      <div class="benefits">
+        <div class="benefit">
+          <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9.5 9.5c0-1 1-1.7 2.5-1.7s2.5.7 2.5 1.7c0 2.6-5 1.6-5 4.2 0 1 1 1.8 2.5 1.8s2.5-.8 2.5-1.8"/></svg></span>
+          <h3>Competitive Pay</h3>
+          <p>Competitive wages with regular opportunities for raises as you grow.</p>
+        </div>
+        <div class="benefit">
+          <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></span>
+          <h3>Flexible Scheduling</h3>
+          <p>Schedules that work with school, family, and life. Tell us your availability.</p>
+        </div>
+        <div class="benefit">
+          <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 9h16M8 3v4M16 3v4M9 14.5l2 2 4-4"/></svg></span>
+          <h3>Sundays Off</h3>
+          <p>Every Chick-fil-A closes on Sundays, so you will always have that day to rest.</p>
+        </div>
+        <div class="benefit">
+          <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 9.5 12 5l9 4.5-9 4.5-9-4.5Z"/><path d="M7 11.5v4c0 1.2 2.2 2.5 5 2.5s5-1.3 5-2.5v-4M21 9.5V15"/></svg></span>
+          <h3>Scholarship Opportunities</h3>
+          <p>Team Members can apply for Chick-fil-A scholarships to support their education.</p>
+        </div>
+        <div class="benefit">
+          <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 17l5-5 4 3 7-8"/><path d="M15 7h5v5"/></svg></span>
+          <h3>Leadership Development</h3>
+          <p>Grow from Team Member to Trainer to Leader. We love to promote from within.</p>
+        </div>
+        <div class="benefit">
+          <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.5-9-9c-1.2-2.8.6-6 3.8-6 2 0 3.5 1.2 5.2 3.2C13.7 6.2 15.2 5 17.2 5c3.2 0 5 3.2 3.8 6-2 4.5-9 9-9 9Z"/></svg></span>
+          <h3>Caring Team Culture</h3>
+          <p>A positive environment built on care, respect, and serving each other and our guests.</p>
+        </div>
+      </div>
+      <div class="roles">
+        <div class="role-card">
+          <h3>Front of House Team Member</h3>
+          <p>The face of our restaurant. Take orders, serve guests in the dining room and drive-thru, and create the warm, welcoming experience our guests love.</p>
+        </div>
+        <div class="role-card">
+          <h3>Back of House Team Member</h3>
+          <p>The heart of our kitchen. Prepare food to Chick-fil-A's high standards of quality and safety, keep the kitchen running smoothly, and take pride in every order.</p>
+        </div>
+      </div>
       <div class="hire">
         <div>
           <h2>Know someone great? We're hiring.</h2>
